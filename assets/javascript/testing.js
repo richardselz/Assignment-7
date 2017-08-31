@@ -12,34 +12,24 @@
   //Easier reference for database service
   var database = firebase.database();
 
-  function clearInputs() {
-    $("#train-name-input").val("");
-    $("#destination-input").val("");
-    $("#first-train-input").val("");
-    $("#frequency-input").val("");
-  }
-
   $("#add-train-btn").on("click", function(event) {
   	event.preventDefault();
 
   	var trainName = $("#train-name-input").val().trim();
   	var trainDestination = $("#destination-input").val().trim();
   	var trainFirst = $("#first-train-input").val().trim();
-  	var trainFrequency = $("#frequency-input").val().trim();
-    var firstTimeConv = parseInt(moment(trainFirst, "hh:mm").subtract(1,
-      "years").format("X"));
+    var firstTimeConv = moment(trainFirst, "hh:mm").subtract(1,
+      "years");
     var currentTime = moment().format("hh:mm");
-    var diffTime = moment().diff(moment(firstTimeConv), "minutes");
-    var trainFrequency = $("#frequency-input").val().trim();
+    var diffTime = moment().dif(moment(firstTimeConv), "minutes");
+  	var trainFrequency = $("#frequency-input").val().trim();
     var trainRemainder = diffTime%trainFrequency;
-    console.log("Train Diff: "+diffTime);
-    console.log("Train Remainder: "+trainRemainder);
     var trainMinutes = trainFrequency - trainRemainder;
-    console.log("Train Minutes: "+trainMinutes);
     var trainNext = moment().add(trainMinutes, "minutes");
-    trainNext = moment(trainNext).format("hh:mm");
-    console.log(trainMinutes);
-    console.log(trainNext);
+  	var trainNext = 0;
+  	var trainMinutes = 0;
+  	var trainNext = First Time + Frequency
+  	var trainMinutes = Time of Arrival - Current Time;
 
   	var newTrain = {
 	  	name: trainName,
@@ -51,7 +41,10 @@
 
 	database.ref("/trainData").push(newTrain);
 
-  clearInputs();
+  $("#train-name-input").val("");
+  $("#destination-input").val("");
+  $("#first-train-input").val("");
+  $("#frequency-input").val("");
 
   });
 
